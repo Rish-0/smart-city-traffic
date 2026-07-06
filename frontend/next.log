@@ -1,0 +1,19 @@
+  ▲ Next.js 14.2.15
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 2.3s
+ ○ Compiling / ...
+ ✓ Compiled / in 5.4s (464 modules)
+ GET / 200 in 5647ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 4.4s (1582 modules)
+ ✓ Compiled /dashboard/notifications in 312ms (1570 modules)
+ ✓ Compiled /dashboard/settings in 263ms (1576 modules)
+ ✓ Compiled /dashboard/emergency in 220ms (1582 modules)
+ ○ Compiling /dashboard/traffic ...
+ ✓ Compiled /dashboard/traffic in 902ms (1580 modules)
+ ○ Compiling /dashboard/analytics ...
+ ✓ Compiled /dashboard/analytics in 1225ms (1600 modules)
+ ○ Compiling /dashboard/ai-optimization ...
+ ✓ Compiled /dashboard/ai-optimization in 832ms (1612 modules)
