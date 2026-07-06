@@ -150,7 +150,7 @@ export default function DashboardOverview() {
                   innerRadius={60}
                   outerRadius={100}
                   dataKey="value"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  label={({ name, percent }: any) => `${name} ${((percent || 0) * 100).toFixed(0)}%`}
                 >
                   {congestionData.map((entry: any, idx: number) => (
                     <Cell key={idx} fill={CONGESTION_COLORS[entry.name] || COLORS[idx % COLORS.length]} />

@@ -319,7 +319,7 @@ export default function AnalyticsPage() {
                     <YAxis dataKey="y" name="Speed" tick={{ fill: '#8892a8', fontSize: 11 }} label={{ value: 'Avg Speed (km/h)', angle: -90, position: 'insideLeft', fill: '#8892a8' }} />
                     <Tooltip
                       contentStyle={{ background: '#0f1629', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#e8ecf4' }}
-                      formatter={(val: any, name: string) => [val, name === 'x' ? 'Volume' : 'Speed']}
+                      formatter={(val: any, name: any) => [val, name === 'x' ? 'Volume' : 'Congestion']}
                     />
                     <Scatter data={scatter} fill="#06d6a0" fillOpacity={0.6} />
                   </ScatterChart>
