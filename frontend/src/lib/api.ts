@@ -96,10 +96,10 @@ class ApiClient {
   }
 
   // Traffic
-  getCurrentTraffic() { return this.fetch('/api/traffic/current'); }
+  getCurrentTraffic(source = 'simulation') { return this.fetch(`/api/traffic/current?source=${source}`); }
   getHistoricalTraffic(params?: string) { return this.fetch(`/api/traffic/historical${params ? '?' + params : ''}`); }
   getHeatmap(source = 'simulation') { return this.fetch(`/api/traffic/heatmap?source=${source}`); }
-  getIntersections() { return this.fetch('/api/traffic/intersections'); }
+  getIntersections(source = 'simulation') { return this.fetch(`/api/traffic/intersections?source=${source}`); }
 
   // AI
   optimizeSignal(data: any) { return this.fetch('/api/ai/optimize', { method: 'POST', body: JSON.stringify(data) }); }

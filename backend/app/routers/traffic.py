@@ -13,10 +13,10 @@ from app.models.user import User
 router = APIRouter(prefix="/api/traffic", tags=["Traffic"])
 
 @router.get("/current")
-async def get_current_traffic(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    latest = db.query(func.max(TrafficData.timestamp)).filter(TrafficData.source == "simulation").scalar()
+async def get_current_traffic(source: str = Query("simulation"), db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    latest = db.query(func.max(TrafficData.timestamp)).filter(TrafficData.source == source).scalar()
     if not latest: return {"intersections": [], "summary": {}}
-    data = db.query(TrafficData).filter(TrafficData.source == "simulation", TrafficData.timestamp == latest).all()
+    data = db.query(TrafficData).filter(TrafficData.source == source, TrafficData.timestamp == latest).all()
     intersections = []
     tv, ts, hc = 0, 0, 0
     for d in data:
@@ -62,12 +62,12 @@ async def get_heatmap(source: str = Query("simulation"), db: Session = Depends(g
     return {"heatmap": [{"hour": r.hour, "weekday": r.weekday, "weekday_name": r.weekday_name, "avg_volume": round(r.avg_volume)} for r in results]}
 
 @router.get("/intersections")
-async def get_intersections(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+async def get_intersections(source: str = Query("simulation"), db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     signals = db.query(Signal).all()
     result = []
     for s in signals:
         latest = db.query(TrafficData).filter(TrafficData.intersection_id == s.intersection_id,
-            TrafficData.source == "simulation").order_by(desc(TrafficData.timestamp)).first()
+            TrafficData.source == source).order_by(desc(TrafficData.timestamp)).first()
         result.append({"intersection_id": s.intersection_id, "zone": s.zone,
             "latitude": float(s.latitude) if s.latitude else None, "longitude": float(s.longitude) if s.longitude else None,
             "green_duration": s.green_duration, "red_duration": s.red_duration, "mode": s.mode, "status": s.status,

@@ -164,11 +164,17 @@ async def auto_optimize_all(db: Session = Depends(get_db), current_user: User = 
 
     for sig in signals:
         try:
-            # Get latest traffic data for this intersection
+            # Get latest traffic data for this intersection (prefer live, fallback to simulation)
             latest = db.query(TrafficData).filter(
                 TrafficData.intersection_id == sig.intersection_id,
-                TrafficData.source == "simulation"
+                TrafficData.source == "tomtom_live"
             ).order_by(desc(TrafficData.timestamp)).first()
+            
+            if not latest:
+                latest = db.query(TrafficData).filter(
+                    TrafficData.intersection_id == sig.intersection_id,
+                    TrafficData.source == "simulation"
+                ).order_by(desc(TrafficData.timestamp)).first()
 
             volume = latest.traffic_volume if latest else 3000
             weather = latest.weather_main if latest and latest.weather_main else "Clear"

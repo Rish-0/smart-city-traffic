@@ -12,6 +12,7 @@ export default function TrafficPage() {
   const [intersections, setIntersections] = useState<any[]>([]);
   const [filterZone, setFilterZone] = useState('');
   const [filterCongestion, setFilterCongestion] = useState('');
+  const [dataSource, setDataSource] = useState('simulation');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,8 +20,8 @@ export default function TrafficPage() {
     setLoading(true);
     setError(null);
     Promise.all([
-      api.getCurrentTraffic().catch(() => null),
-      api.getIntersections().catch(() => null),
+      api.getCurrentTraffic(dataSource).catch(() => null),
+      api.getIntersections(dataSource).catch(() => null),
     ]).then(([traffic, ints]) => {
       if (!traffic && !ints) {
         setError('Unable to load traffic data. Make sure the backend is running.');
@@ -31,7 +32,7 @@ export default function TrafficPage() {
     });
   };
 
-  useEffect(() => { loadData(); }, []);
+  useEffect(() => { loadData(); }, [dataSource]);
 
   if (loading) {
     return (
@@ -72,7 +73,25 @@ export default function TrafficPage() {
             <h1 className="page-title">Traffic Monitoring</h1>
             <p className="page-description">Real-time intersection data and signal status</p>
           </div>
-          <button className="btn btn-secondary" onClick={loadData}>🔄 Refresh</button>
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '4px', borderRadius: '8px', display: 'flex', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <button 
+                className={`btn ${dataSource === 'simulation' ? 'btn-primary' : ''}`}
+                style={{ background: dataSource === 'simulation' ? '' : 'transparent', border: 'none', padding: '6px 12px' }}
+                onClick={() => setDataSource('simulation')}
+              >
+                🎮 Simulation
+              </button>
+              <button 
+                className={`btn ${dataSource === 'tomtom_live' ? 'btn-primary' : ''}`}
+                style={{ background: dataSource === 'tomtom_live' ? '' : 'transparent', border: 'none', padding: '6px 12px' }}
+                onClick={() => setDataSource('tomtom_live')}
+              >
+                📡 Live (TomTom)
+              </button>
+            </div>
+            <button className="btn btn-secondary" onClick={loadData}>🔄 Refresh</button>
+          </div>
         </div>
       </div>
 
