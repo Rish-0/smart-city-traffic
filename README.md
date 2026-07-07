@@ -106,11 +106,6 @@ To run the custom traffic simulation and evaluate the AI controller against base
 python simulation.py
 ```
 
-## 📄 Documentation
-
-- [Software Requirements Specification](./Software%20Requirements%20Specification.docx)
-- [Final Project Documentation](./_Smart_City_Traffic_Optimisation_System__Final_Documentation.pdf)
-
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/Rish-0/smart-city-traffic/issues).
