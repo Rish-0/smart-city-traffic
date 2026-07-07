@@ -105,6 +105,10 @@ class ApiClient {
   optimizeSignal(data: any) { return this.fetch('/api/ai/optimize', { method: 'POST', body: JSON.stringify(data) }); }
   getPredictions(hours = 6) { return this.fetch(`/api/ai/predictions?hours_ahead=${hours}`); }
   getAIHealth() { return this.fetch('/api/ai/health'); }
+  getAIActionLog(params?: string) { return this.fetch(`/api/ai/action-log${params ? '?' + params : ''}`); }
+  autoOptimizeAll() { return this.fetch('/api/ai/auto-optimize-all', { method: 'POST' }); }
+  revertAIAction(logId: number) { return this.fetch(`/api/ai/revert/${logId}`, { method: 'POST' }); }
+  getAutoOptimizeStatus() { return this.fetch('/api/ai/auto-status'); }
 
   // Analytics
   getAnalyticsSummary() { return this.fetch('/api/analytics/summary'); }
