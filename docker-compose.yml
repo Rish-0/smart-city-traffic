@@ -14,7 +14,6 @@ services:
       - DEBUG=false
     volumes:
       - ./Dataset:/app/Dataset:ro
-      - ./traffic_simulation.csv:/app/traffic_simulation.csv:ro
       - backend_data:/app/reports
     restart: unless-stopped
 

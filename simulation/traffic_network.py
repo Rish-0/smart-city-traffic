@@ -14,7 +14,7 @@ from pathlib import Path
 # ---------------------
 GRID_SIZE = 5
 NUM_INTERSECTIONS = GRID_SIZE * GRID_SIZE  # 25
-DATASET_DIR = Path(__file__).parent / "Dataset"
+DATASET_DIR = Path(__file__).parent.parent / "Dataset"
 ADJ_PICKLE = DATASET_DIR / "adj_METR-LA.pkl"
 
 # Zone definitions for a 5x5 city grid

@@ -1,7 +1,7 @@
 import pickle
 import numpy as np
 
-data = pickle.load(open('Dataset/adj_METR-LA.pkl', 'rb'), encoding='latin1')
+data = pickle.load(open('../Dataset/adj_METR-LA.pkl', 'rb'), encoding='latin1')
 # Item 0: list of sensor IDs
 # Item 1: dict (sensor_id -> index mapping)
 # Item 2: ndarray (207,207) adjacency matrix

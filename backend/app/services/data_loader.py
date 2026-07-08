@@ -120,7 +120,7 @@ def load_all_data(db: Session, base_dir: str) -> dict:
         logger.info(f"Data already loaded ({existing} records). Skipping.")
         return {"metro": 0, "simulation": 0, "status": "skipped", "existing": existing}
     metro_path = os.path.join(base_dir, "Dataset", "Metro_Interstate_Traffic_Volume.csv")
-    sim_path = os.path.join(base_dir, "traffic_simulation.csv")
+    sim_path = os.path.join(base_dir, "Dataset", "traffic_simulation.csv")
     mc = load_metro_dataset(db, metro_path)
     sc = load_simulation_dataset(db, sim_path)
     return {"metro": mc, "simulation": sc, "status": "loaded", "total": mc + sc}
