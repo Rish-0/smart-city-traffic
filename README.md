@@ -106,6 +106,6 @@ To run the custom traffic simulation and evaluate the AI controller against base
 python simulation.py
 ```
 
-## 🤝 Contributing
+## Deployed Link
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/Rish-0/smart-city-traffic/issues).
+https://vercel.com/rish-0s-projects/smart-city-traffic
